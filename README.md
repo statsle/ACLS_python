@@ -9,7 +9,6 @@ Suppose we observe data vectors  (x<sub>i</sub>,y<sub>i</sub>) that follow a lin
 Install **ACLS_python** from GitHub:
 ``` python
 pip install git+https://github.com/rruimao/ACLS_python.git
-from ACLS.RGD_bindings import RGD
 ``` 
 ## Function
 - **RGD**: Randomized gradient descent method.
@@ -26,15 +25,17 @@ we generate contaminated random errors &epsilon;<sub>i</sub> from a mixture of n
 We randomly generate 10 initials &beta;<sup>*</sup> ~ Unif(B<sub>2</sub>(&tau;)), where Unif(B<sub>2</sub>(&tau;)) is a uniform distribution on the l<sub>2</sub>-ball B<sub>2</sub>(&tau;)={x: ||x||<sub>2</sub> &leq; &tau; }. This method finds the initial that provides the smallest adaptive capped least squares loss.
 
 ```python
+from ACLS.RGD_bindings import RGD
+import numpy as np
 import pandas as pd
 df = pd.read_csv('ex_1.csv')
 Y=df['Y'].to_numpy()
 X=df[['Intercept','X1','X2','X3','X4','X5']].to_numpy()
 n=50
-tau=np.sqrt(50)/np.log(np.log(n))
 iter=10
 eta_0=1e-3
 alpha=2
+tau=np.sqrt(n)/np.log(np.log(n))
 beta_1=RGD(X,Y,tau,iter,eta_0,alpha)
 ```
 
@@ -46,10 +47,10 @@ df = pd.read_csv('ex_2.csv')
 Y=df['Y'].to_numpy()
 X=df[['Intercept','X1','X2','X3','X4','X5']].to_numpy()
 n=50
-tau=np.sqrt(50)/np.log(np.log(n))
 iter=10
 eta_0=1e-3
 alpha=2
+tau=np.sqrt(n)/np.log(np.log(n))
 beta_2=RGD(X,Y,tau,iter,eta_0,alpha)
 ```
 
