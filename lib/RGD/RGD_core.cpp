@@ -152,6 +152,7 @@ MatrixXd runif_in_pball(const int n,const int d, const int p, const double r=1){
        double a=pow(U(0),(1.0/p1))+pow(U(1),(1.0/p2));
        while (a>1){
         U=(VectorXd::Random(2).array()+1.)*0.5; 
+        a=pow(U(0),(1.0/p1))+pow(U(1),(1.0/p2));
        }
        VectorXd A=(VectorXd::Random(1).array()+1.)*0.5; 
        s=s+(A.array().log().sum())*pow(U(0),1.0/p1)/(pow(U(0),(1.0/p1))+pow(U(1),(1.0/p2)));
